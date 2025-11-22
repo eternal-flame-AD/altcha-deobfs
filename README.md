@@ -22,7 +22,7 @@ The core cryptographic routine is generic and has independent educational and re
 
 ## Demo
 
-A copy of the official obfuscation script is available for reference [here](./obfuscate.ts).
+A copy of the official obfuscation script is available for reference [here](./obfuscate.ts) (note this script is licensed under MIT to original author, see file header).
 
 A piece of ciphertext taken straight from https://altcha.org/contact/#reporting-security-issues:
 
@@ -52,7 +52,7 @@ This was identified to be a vulnerability or other security issue that requires 
 - 11/11/2025 for first contact
 - 11/14/2025 for second contact with additional information
 
-As of today, 11/22/2025, this is considered dismissed, out of scope, dated and published as is.
+As of today, 11/22/2025, this is considered dismissed due to no response, out of scope, dated and published as is.
 
 ## References
 
