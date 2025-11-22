@@ -35,11 +35,29 @@ fn main() {
     let y0 = gcm_nonceless::recover_counter(&cipher, &data_decoded, None, &[]);
     data_decoded.truncate(data_decoded.len() - 16);
     let nonce = gcm_nonceless::extract_nonce::<C>(&y0).unwrap();
-    let nonce_num = nonce
-        .iter()
-        .rev()
-        .fold(0u128, |acc, &b| acc * 256 + u128::from(b));
-    eprintln!("Nonce: {:?} (number: {})", nonce, nonce_num);
+    let lsb = u64::from_le_bytes(nonce[..8].try_into().unwrap());
+    let msb = u32::from_le_bytes(nonce[8..].try_into().unwrap());
+    let nonce_num = (u128::from(msb) << 64) | u128::from(lsb);
+    let mut nonce_hex = [0; 24];
+    for (i, b) in nonce.iter().enumerate() {
+        let low = b & 0x0f;
+        let high = (b & 0xf0) >> 4;
+        nonce_hex[i * 2] = if high < 10 {
+            b'0' + high as u8
+        } else {
+            b'a' + high as u8 - 10
+        };
+        nonce_hex[i * 2 + 1] = if low < 10 {
+            b'0' + low as u8
+        } else {
+            b'a' + low as u8 - 10
+        };
+    }
+    eprintln!(
+        "Nonce: {} (number: {})",
+        std::str::from_utf8(&nonce_hex).unwrap(),
+        nonce_num
+    );
     let mut cipher = gcm_nonceless::instantiate_keystream(cipher, &y0);
     cipher.apply_keystream(&mut data_decoded);
     std::io::stdout().write_all(&data_decoded).unwrap();

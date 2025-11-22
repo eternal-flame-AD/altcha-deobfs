@@ -28,21 +28,21 @@ A piece of ciphertext taken straight from https://altcha.org/contact/#reporting-
 
 ```bash
 target/release/altcha-deobfs --data HD9IT+QrWtjss/0IgpfKbifkkNsSTFxS6PLv0vTjYfcIrcP1l+TfDpNZ
-Nonce: [163, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] (number: 4003)
+Nonce: a30f00000000000000000000 (number: 4003)
 mailto:security@altcha.org
 ```
 
 Prove it really is constant time, no searching or precomputation required:
 
 ```bash
-time target/release/altcha-deobfs --key SodiumChloride --data \
+ time target/release/altcha-deobfs --key SodiumChloride --data \
     $(NUMBER=10000000000 KEY=SodiumChloride ./obfuscate.ts \
     "Meet me at mile marker 663.")
-Nonce: [0, 228, 11, 84, 2, 0, 0, 0, 0, 0, 0, 0] (number: 10000000000)
+Nonce: 00e40b540200000000000000 (number: 10000000000)
 Meet me at mile marker 663.
-real    0m0.009s
-user    0m0.003s
-sys     0m0.007s
+real    0m0.007s
+user    0m0.000s
+sys     0m0.008s
 ```
 
 ## Vendor Notification
