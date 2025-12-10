@@ -54,6 +54,8 @@ This was identified to be a vulnerability or other security issue that requires 
 
 As of today, 11/22/2025, this is considered dismissed due to no response, out of scope, dated and published as is.
 
+Catalog numbers: CVE-2025-65849 [GHSA-mpmc-qchh-r9q8](https://github.com/advisories/ghsa-mpmc-qchh-r9q8)
+
 ## References
 
 - [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)
