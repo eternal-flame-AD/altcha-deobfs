@@ -1,5 +1,13 @@
 # Altcha Deobfuscation
 
+Update 12/11/2025: The vendor retroactively attempted to dispute the validity of this vulnerability, see discussions [here](https://github.com/github/advisory-database/pull/6536), my response is in short:
+
+- The correct time to debate about the validity and scope is during the coordinated responsible disclosure process using the posted timeline and contact venue, not after the fact and attempt to muddy the waters by bypassing collaborative channels.
+- This is a vulnerability because there is **no proof of work**. It is apparent from the referenced web material and the referenced dispute basis that this computational effort is the primary if not sole way of achieving any practical deterrent to abuse. This nonlinear and nontrivial computational effort to decode the obfuscated data is a fundamental correctness requirement of this protection mechanism, and this PoC demonstrates the computational effort is fixed and trivial (approx. 2 AES operations) regardless of any cost factors.
+- The vendor did disclose "this is not cryptographic security", but I believe any reasonable person reading the text would believe the feature SHOULD provide at least some level of additional protection that is more than trivial encoding only methods like base64, and I believe this additional protection is proven to be invalid by this issue.
+
+---
+
 A cryptanalytic break for deobfuscating text obfuscated by Altcha's ["Proof-of-Work" obfuscation scheme](https://altcha.org/docs/v2/obfuscation/#how-it-works) present in 0.8.0 and later versions.
 
 Altcha documentation describes the design of the obfuscation scheme as follows:
