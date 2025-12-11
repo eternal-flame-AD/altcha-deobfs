@@ -1,0 +1,54 @@
+Message-ID: <6b22545f-d140-4ec7-b1a2-d95d767a5f92@yumechi.jp>
+Date: Tue, 11 Nov 2025 00:53:16 -0600
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: security@altcha.org
+From: Yumechi <security@yumechi.jp>
+Subject: [SECURITY] Data Obfuscation function has Instant Constant Time
+ Solution
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Hi Altcha Team,
+
+
+I am writing to inform you of a design issue concerning your "Data 
+Obfuscation" feature. Per your documentation at 
+https://altcha.org/docs/obfuscation/ , you mentioned "obfuscation 
+employs a proof-of-work (PoW) approach based on symmetric AES 
+encryption." You further quantified "Decryption complexity depends on 
+the number range used."Â  which I interpret as it should not have a 
+constant time solution.
+
+However, in your setup where the adversary gets control of both the key 
+and the entire ciphertext, a constant time-space solution exists by 
+inverting AES-GCM auth tags.The initialization block can be computed as 
+generating the authentication input, XOR with the observed tag, then 
+decrypt using AES-ECB, then we can work forward to decrypt the rest of 
+the data as normal.
+
+A graphical representation is available here: 
+https://en.wikipedia.org/wiki/Galois/Counter_Mode#Basic_operation , we 
+will start working out the values below node "Ciphertext X", then at the 
+final XOR we know the auth tag so we can compute E_k(iv), which we can 
+then invert with E^(-1) (i.e. AES decryption) to recover initial state 
+"Counter 0".
+
+
+
+Here is a proof of concept using the "security@altcha.org" string on 
+your contact page: 
+https://gist.github.com/eternal-flame-AD/64e82c7733ddb21d466a9b4d83f7d00e
+
+
+Per your SECURITY.md policy, I will hold this for embargo until next 
+Friday (more than 5 business days), if I have not heard anything back by 
+then I may consider it out of scope and publish it since there is no 
+real CIA impact here just an obfuscation taking much less effort than 
+intended.
+
+Thanks,
+
+Yumechi
+
