@@ -1,5 +1,7 @@
 # Altcha Deobfuscation
 
+Update 12/13/2025: GitHub has reviewed the vendor post-hoc dispute and adjudicated the CVE and associated curated GHSA entry as valid. Additional information regarding the exploitation status (PoC only) has been added to the enriched entry for public information.
+
 Update 12/11/2025: The vendor retroactively attempted to dispute the validity of this vulnerability, see discussions [here](https://github.com/github/advisory-database/pull/6536), my response is in short:
 
 - The correct time to debate about the validity and scope is during the coordinated responsible disclosure process using the posted timeline and contact venue, not after the fact and attempt to muddy the waters by bypassing collaborative channels. I published my vendor notification emails [here](./emails), provided plenty of opportunity for the vendor to dispute constructively or request an extension to the CNA-LR disclosure process and received _no reply_ as of 12/11/2025.
